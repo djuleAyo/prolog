@@ -1,0 +1,34 @@
+type
+  string int float double bool
+
+type(T) :- label(enum, T)
+
+scalar
+  date email color
+
+field(F, A) :- leaf(F), ancestor(A, F)
+
+validator(T) :- label(enum, T)
+
+formField(F) :- leaf(form)
+accessor(A) :- son(M, model), son(A, M), label(unique, A)
+
+validator(T) :- mark(scalar, T)
+field => type, auth/r, auth/w
+
+formFieldValidation
+  live          % password check
+  remoteLive    % IE unique username with live check
+  blur          % typical
+  remateBlur    % IE unique username
+
+inheritStrategy.enum
+  oneTable    %all the fields in one table
+  evryTable   %every node of inheritance tee has a table with all its attrs
+  key         %subclass points to super with a key
+
+authProvider.enum
+  facebook
+  github
+  google
+  oauth

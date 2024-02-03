@@ -1,0 +1,448 @@
+Move Editor into Last Group
+Move Editor into Next Group
+Move Editor into Previous Group
+Accept Chat Input
+Accept Inline Completion
+Accept Inline Suggestion
+Accept Next Word Of Inline Suggestion
+Accessible Diff Viewer: Go to Next Difference
+Accessible Diff Viewer: Go to Previous Difference
+Add Cursor Above
+Add Cursor Above
+Add Cursor Below
+Add Cursor Below
+Add Cursors to Line Ends
+Add Line Comment
+Add Selection To Next Find Match
+Ai
+Auto Fix...
+Bem
+Calls: Show Call Hierarchy
+Cancel Selection Anchor
+Change All Occurrences
+Change Language Mode
+Chat: Clear
+Chat: Insert at Cursor
+Chat: Next Code Block
+Chat: Next File Tree
+Chat: Previous Code Block
+Chat: Run in Terminal
+Chat: Run in Terminal
+Chat: Stop Listening
+Close Exception Widget
+Close Window
+Close Window
+Comments: Add Comment on Current Selection
+Comments: Go to Next Commenting Range
+Comments: Go to Previous Commenting Range
+Copy
+Copy Line Down
+Copy Line Up
+Create Folding Range from Selection
+Create: New File...
+Cursor Undo
+Cut
+Debug: Continue
+Debug: Disconnect
+Debug: Focus Next Debug Console
+Debug: Focus Previous Debug Console
+Debug: Inline Breakpoint
+Debug: Pause
+Debug: Restart
+Debug: Show Hover
+Debug: Start Debugging
+Debug: Start Debugging and Stop on Entry
+Debug: Start Debugging and Stop on Entry
+Debug: Start Without Debugging
+Debug: Step Into
+Debug: Step Into Target
+Debug: Step Out
+Debug: Step Over
+Debug: Stop
+Delete Line
+Detect Language From Content
+Developer: Reload Window
+Developer: Toggle Developer Tools
+Disable Accessible View Hint
+Emmet: Expand Abbreviation
+Expand Line Selection
+Expand Selection
+Explorer: Focus on Open Editors View
+File: Compare Active File with Clipboard
+File: Compare Active File with Saved
+File: Copy Path of Active File
+File: Copy Path of Active File
+File: Copy Relative Path of Active File
+File: Copy Relative Path of Active File
+File: New Untitled Text File
+File: Open Active File in New Window
+File: Open Containing Folder
+File: Open File...
+File: Open Folder...
+File: Open Folder...
+File: Open Recent...
+File: Open...
+File: Save without Formatting
+File: Show All Editors By Appearance
+Find
+Find Next
+Find Next
+Find Next
+Find Next
+Find Next Selection
+Find Previous
+Find Previous
+Find Previous
+Find Previous
+Find Previous Selection
+Fix Colon and Semicolon
+Focus Breadcrumbs
+Focus Find
+Focus Hover
+Focus Next Terminal Group
+Focus Next Terminal in Terminal Group
+Focus Next Terminal in Terminal Group
+Focus Previous Terminal Group
+Focus Previous Terminal in Terminal Group
+Focus Previous Terminal in Terminal Group
+Focus Terminal
+Focus Terminal Tabs View
+Focus and Select Breadcrumbs
+Focus and Select Breadcrumbs
+Fold
+Fold All
+Fold All Block Comments
+Fold All Except Selected
+Fold All Regions
+Fold Level 1
+Fold Level 2
+Fold Level 3
+Fold Level 4
+Fold Level 5
+Fold Level 6
+Fold Level 7
+Format Document
+Format Document
+Format Selection
+Git: Revert Selected Ranges
+Git: Stage Selected Ranges
+Git: Unstage Selected Ranges
+GitHub Copilot: Accept panel suggestion at the cursor
+GitHub Copilot: Navigate to the next panel suggestion
+GitHub Copilot: Navigate to the previous panel suggestion
+GitHub Copilot: Open Completions Panel
+GitHub Copilot: Suggest Terminal Command
+Go Back
+Go Forward
+Go To Bottom Hover
+Go To Bottom Hover
+Go To Bottom Hover
+Go To Symbol in Accessible View
+Go To Symbol in Accessible View
+Go To Symbol in Accessible View
+Go To Top Hover
+Go To Top Hover
+Go to Bracket
+Go to Definition
+Go to Definition
+Go to File...
+Go to File...
+Go to Implementations
+Go to Last Edit Location
+Go to Line/Column...
+Go to Next Change
+Go to Next Change
+Go to Next Problem (Error, Warning, Info)
+Go to Next Problem in Files (Error, Warning, Info)
+Go to Next Reference
+Go to Next Symbol Highlight
+Go to Previous Change
+Go to Previous Change
+Go to Previous Problem (Error, Warning, Info)
+Go to Previous Problem in Files (Error, Warning, Info)
+Go to Previous Reference
+Go to Previous Symbol Highlight
+Go to Recent Directory...
+Go to References
+Go to Symbol in Editor...
+Go to Symbol in Workspace...
+Help: Keyboard Shortcuts Reference
+Hide Find
+Hide Find
+Hide Inline Suggestion
+Hide the Color Picker
+Indent Line
+Inline Chat: Accept Changes
+Inline Chat: Accept Changes
+Inline Chat: Focus Input
+Inline Chat: Focus Input
+Inline Chat: Start Inline Chat
+Inline Chat: Start Inline Chat
+Insert Color with Standalone Color Picker
+Insert Line Above
+Insert Line Below
+Jest: Run Related Tests
+Keep Editor
+Kill the Active Terminal in Editor Area
+Leroy
+Markdown: Open Preview
+Markdown: Open Preview to the Side
+Move Editor Group Down
+Move Editor Group Left
+Move Editor Group Right
+Move Editor Group Up
+Move Editor Left
+Move Editor Right
+Move Editor into First Group
+Move Last Selection To Next Find Match
+Move Line Down
+Move Line Up
+New Window
+Notebook: Accept Detected Language For Cell
+Notebook: Cell Cursor Page Down
+Notebook: Cell Cursor Page Down Select
+Notebook: Cell Cursor Page Up
+Notebook: Cell Cursor Page Up Select
+Notebook: Center Active Cell
+Notebook: Change Cell to Code
+Notebook: Change Cell to Markdown
+Notebook: Clear Cell Outputs
+Notebook: Collapse Cell Input
+Notebook: Collapse Cell Output
+Notebook: Copy Cell Down
+Notebook: Copy Cell Up
+Notebook: Delete Cell
+Notebook: Edit Cell
+Notebook: Execute Cell
+Notebook: Execute Notebook Cell and Insert Below
+Notebook: Execute Notebook Cell and Select Below
+Notebook: Expand Cell Input
+Notebook: Expand Cell Output
+Notebook: Focus First Cell
+Notebook: Focus In Active Cell Output
+Notebook: Focus Last Cell
+Notebook: Focus Next Cell Editor
+Notebook: Focus Next Cell Editor
+Notebook: Focus Next Cell Editor
+Notebook: Focus Next Cell Editor
+Notebook: Focus Next Cell Editor
+Notebook: Focus Next Cell Editor
+Notebook: Focus Out Active Cell Output
+Notebook: Focus Previous Cell Editor
+Notebook: Focus Previous Cell Editor
+Notebook: Focus Previous Cell Editor
+Notebook: Fold Cell
+Notebook: Fold Cell
+Notebook: Format Notebook
+Notebook: Insert Code Cell Above
+Notebook: Insert Code Cell Below
+Notebook: Join With Next Cell
+Notebook: Join With Previous Cell
+Notebook: Move Cell Down
+Notebook: Move Cell Up
+Notebook: Paste Cell Above
+Notebook: Split Cell
+Notebook: Stop Editing Cell
+Notebook: Stop Editing Cell
+Notebook: Stop Editing Cell
+Notebook: Toggle Scroll Cell Output
+Notebook: Unfold Cell
+Notebook: Unfold Cell
+Notifications: Accept Notification Primary Action
+Notifications: Hide Notifications
+Notifications: Show Notifications
+Open Accessibility Help
+Open Accessibility Help
+Open Accessible View
+Open Accessible View
+Open Definition to the Side
+Open Definition to the Side
+Open Detected Link...
+Open Detected Link...
+Open Last Editor in Group
+Open Last Editor in Group
+Open New External Terminal
+Open Next Editor
+Open Next Editor in Group
+Open Previous Editor
+Open Previous Editor in Group
+Organize Imports
+Outdent Line
+Page Down Hover
+Page Down Hover
+Page Up Hover
+Page Up Hover
+Paste Selection into Active Terminal
+Paste into Active Terminal
+Peek Call Hierarchy
+Peek Definition
+Peek Implementations
+Pin Editor
+Preferences: Clear Settings Search Results
+Preferences: Color Theme
+Preferences: Focus Settings Search
+Preferences: Focus Settings Table of Contents
+Preferences: Move Focus Up One Level
+Preferences: Open Keyboard Shortcuts
+Preferences: Open Keyboard Shortcuts
+Preferences: Show Setting Context Menu
+Quick Fix...
+Quick Open Least Recently Used Editor in Group
+Quick Open Previous Recently Used Editor in Group
+REPL Accept Input
+REPL Focus Content to Filter
+Redo
+Refactor...
+References: Find All References
+Remote: Show Remote Menu
+Remove Brackets
+Remove Line Comment
+Remove Manual Folding Ranges
+Rename Symbol
+Reopen Closed Editor
+Replace
+Replace with Next Value
+Replace with Next Value
+Replace with Previous Value
+Replace with Previous Value
+Reset Zoom
+Resize Terminal Left
+Resize Terminal Right
+Run Recent Command...
+Run Recent Command...
+Scroll Down (Line)
+Scroll Down (Page)
+Scroll Down Hover
+Scroll Left Hover
+Scroll Right Hover
+Scroll To Next Command
+Scroll To Previous Command
+Scroll Up Hover
+Scroll to Bottom
+Search Editor: Decrease Context Lines
+Search Editor: Delete File Results
+Search Editor: Focus Search Editor Input
+Search Editor: Increase Context Lines
+Search Editor: Open Results in Editor
+Search Editor: Search Again
+Search Editor: Select All Matches
+Search Editor: Toggle Context Lines
+Search Editor: Toggle Match Case
+Search Editor: Toggle Match Whole Word
+Search Editor: Toggle Use Regular Expression
+Search: Cancel Search
+Search: Find in Files
+Search: Focus Next Search Result
+Search: Focus Previous Search Result
+Search: Replace in Files
+Select All
+Select All Occurrences of Find Match
+Select from Anchor to Cursor
+Set Selection Anchor
+Show All Commands
+Show All Commands
+Show Editor Context Menu
+Show Explorer
+Show Extensions
+Show Next Change
+Show Next Inline Suggestion
+Show Next in Accessible View
+Show Previous Change
+Show Previous Inline Suggestion
+Show Previous in Accessible View
+Show Run and Debug
+Show Search
+Show Source Control
+Show or Focus Hover
+Shrink Selection
+Split Editor
+Split Editor Down
+Split Editor Left
+Split Editor in Group
+Start Linked Editing
+Stop Inlay Hints Reading
+Submit to Secondary Agent
+Tasks: Run Build Task
+Terminal: Accessible Buffer Go to Next Command
+Terminal: Accessible Buffer Go to Previous Command
+Terminal: Clear Selection
+Terminal: Copy Selection
+Terminal: Create New Terminal
+Terminal: Scroll Up (Line)
+Terminal: Scroll Up (Page)
+Terminal: Scroll to Top
+Terminal: Search Workspace
+Terminal: Select To Next Command
+Terminal: Select To Previous Command
+Terminal: Show Terminal Quick Fixes
+Terminal: Split Terminal
+Terminal: Toggle Find Using Case Sensitive
+Terminal: Toggle Find Using Regex
+Terminal: Toggle Find Using Whole Word
+Terminal: Toggle Size to Content Width
+Test: Debug All Tests
+Test: Debug Failed Tests
+Test: Debug Last Run
+Test: Debug Test at Cursor
+Test: Debug Tests in Current File
+Test: Go to Next Test Failure
+Test: Go to Previous Test Failure
+Test: Peek Output
+Test: Rerun Failed Tests
+Test: Rerun Last Run
+Test: Run Test at Cursor
+Test: Toggle Inline Test Output
+Test: Toggle Test History in Peek
+Toggle Block Comment
+Toggle Fold
+Toggle Line Comment
+Toggle Line Comment
+Toggle Screen Reader Accessibility Mode
+Toggle Screen Reader Accessibility Mode
+Toggle Tab Key Moves Focus
+Toggle Vertical/Horizontal Editor Layout
+Trigger Inline Suggestion
+Trigger Parameter Hints
+Trigger Suggest
+Trigger Suggest
+Trim Trailing Whitespace
+Undo
+Unfold
+Unfold All
+Unfold All Except Selected
+Unfold All Regions
+Unfold Recursively
+View: Close All Editor Groups
+View: Close All Editors
+View: Close All Editors in Group
+View: Close Editor
+View: Close Saved Editors in Group
+View: Focus Editor Group Above
+View: Focus Editor Group Below
+View: Focus First Editor Group
+View: Focus Left Editor Group
+View: Focus Next Part
+View: Focus Previous Part
+View: Focus Right Editor Group
+View: Focus into Primary Side Bar
+View: Join Editor in Group
+View: Keep Editor
+View: Move Editor Group Down
+View: Split Editor Orthogonal
+View: Split Editor Right
+View: Split Editor Up
+View: Toggle Debug Console
+View: Toggle Full Screen
+View: Toggle Maximize Editor Group
+View: Toggle Output
+View: Toggle Panel Visibility
+View: Toggle Primary Side Bar Visibility
+View: Toggle Problems
+View: Toggle Secondary Side Bar Visibility
+View: Toggle Terminal
+View: Toggle Word Wrap
+View: Toggle Zen Mode
+View: Zoom In
+Welcome: Go Back
+Workspaces: Close Workspace
+Views Unpin Editor

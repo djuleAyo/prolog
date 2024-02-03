@@ -1,0 +1,4 @@
+model: son(M, model)
+  field: son(F, model)
+    mark: nonImplicitMark(Mark, field)
+      root: root(mark, R)

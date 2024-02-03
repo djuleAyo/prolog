@@ -1,0 +1,7 @@
+{{#each model}}
+model {{capitalize _}} {
+	{{#each field}}
+    {{_}} {{joinFieldMarks mark}}
+    {{/each}}
+}
+{{/each}}
