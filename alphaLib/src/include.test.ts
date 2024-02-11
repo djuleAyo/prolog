@@ -53,7 +53,9 @@ deep1 2
 
 deep source 2
 `
-
+beforeEach(() => {
+  console.log('before each')
+})
 describe('include', () => {
   it('should include a file by copy paste it in place of include line', async () => {
     await fs.writeFile('inclusionFile.test', includedFile)

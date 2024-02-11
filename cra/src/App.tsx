@@ -1,71 +1,20 @@
-import styled from 'styled-components';
 import './App.css';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useKeybinds } from './hooks/useKeybinds';
-import { Singleton, WordResolution } from './docsierra/shared';
+import { InvisibleInput, Suggestion } from './docsierra/components';
+import { Msg, WelcomeMessage } from './docsierra/messages';
 import { ToastRoot } from './uiToolkit/toast';
+import { useAppDispatch, useAppSelector } from './app/hooks';
+import { nextSuggestion, operatorInput, prevSuggestion, submit, suggestionSelected, textInput, unexpectedOperator, wordPromoted } from './docsierra/main.slice';
+import { toTokenComponents } from './docsierra/expression';
+import { FixedSizeGrid } from 'react-window';
+import AutoSizer from 'react-virtualized-auto-sizer';
+import { emojis } from './emojis';
+import styled from 'styled-components';
+import { useQuadSelection } from './hooks/useQuadSelection';
+import { set } from 'zod';
 
-const InvisibleInput = styled.input`
-  font-size: 1.5rem;
-  border: none;
-  background: transparent;
-  color: white;
-  width: 100%;
-  &:focus {
-    outline: none;
-  }
-`;
-
-const useVsCodeCommands = () => {
-
-  const [vsCodeCommands, setVsCodeCommands] = useState<string[]>([]);
-
-  useEffect(() => {
-    fetch('/constants/vscodeCommands.txt')
-      .then((response) => {
-        response.text()
-          .then((text) => {
-            const commands = text.split('\n');
-            setVsCodeCommands(commands);
-          })
-      });
-  }, [])
-
-  return vsCodeCommands;
-}
-
-const Suggestion = styled.div<{
-  current: boolean
-}>`
-  ${props => props.current && `
-    background: rgba(255, 255, 255, 0.1);
-  `}
-`
-
-const Token = styled.span<{
-  unresolved?: boolean
-  resolved?: boolean
-}>`
-  ${props => props.unresolved && `
-    color: #00cc00aa;
-  `}
-  ${props => props.resolved && `
-    color: #ccaa00d9;
-  `}
-  margin: 0 5px;
-`
-const errorPathBeggining = <div className="error">
-  <h3>⚠️ Error ⚠️</h3>
-  <p>Start path with a word</p>
-</div>
-
-const WelcomeMessage = <>
-  <h3>Welcome to Docsierra! 👋</h3>
-
-  <p>It was about for something entierly new</p>
-</>
-
-const post = (url: string, body: any) => {
+export const post = (url: string, body: any) => {
   const base = "http://localhost:3005";
   return fetch(`${base}${url}`, {
     method: 'POST',
@@ -73,163 +22,150 @@ const post = (url: string, body: any) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(body)
+  }).then(response => {
+    if (!response.ok) throw new Error(response.statusText);
+    return response.json();
   })
 }
 
-type Suggestion = {
-  word: string
-  wordId: string
-  path: undefined | null | Array<string>
-  labels: undefined | null | Array<string>
-}
-
-const unpackWordOptions = (w: string, options: Array<{
-  path: undefined | null | Array<string>,
-  labels: undefined | null | Array<string>
-}>) => options.map((o, i) => ({
-    word: w,
-    wordId: `${w}${i !== 0 ? `_${i}` : ''}`,
-    path: "path" in o ? o.path : undefined,
-    labels: "labels" in o ? o.labels : undefined
-  } as Suggestion))
+let welcomeToasted = false;
 
 function App() {
-  const [searchText, setSearchText] = useState('');
-  const [suggestions, setSuggestions] = useState<{
-    word: string,
-    wordId: string
-  }[]>([]);
-  const [currentSuggestion, setCurrentSuggestion] = useState<number>(0);
-  const [tokenStack, setTokenStack] = useState<Singleton[]>([]);
+  const { searchText, suggestions, currentSuggestion, tokenPath, query, explicitOperator }
+    = useAppSelector(state => state.main)
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setTimeout(() => {
-      (window as any).toast(WelcomeMessage)
+      !welcomeToasted && (window as any).toast(WelcomeMessage)
+      welcomeToasted = true
     }, 0);
   }, [])
 
-  useEffect(() => {
-    if (!searchText) setSuggestions([]);
+  const [gridRef, setGridRef] = useState()
+  const quad = useQuadSelection(gridRef as any)
 
-    post(`/search`, { searchText })
-      .then((response) => {
-        response.json()
-          .then((data) => {
-            const suggestions = Object.keys(data)
-              .map(w => unpackWordOptions(w, data[w]))
-              .flat()
-            setSuggestions(suggestions)
-          })
-      })
+  useEffect(() => {
+    const ops = './ |'.split('')
+    const op = ops.find(o => searchText.endsWith(o));
+    const word = searchText.slice(0, -1);
+
+    if (op) {
+      if (!explicitOperator && query) {
+        dispatch(operatorInput(' '))
+      }
+      if (!word && !query) {
+        dispatch(unexpectedOperator())
+        return 
+      }
+      console.log('word', word, 'op', op)
+      word && dispatch(wordPromoted({ type: 'urw', word }))
+      dispatch(operatorInput(op))
+    }
+
   }, [searchText])
 
-  useEffect(() => {
-    if (suggestions.length === 0) return setCurrentSuggestion(0);
-  }, [suggestions])
-
   const downKeybind = useCallback(() => {
-    setCurrentSuggestion((currentSuggestion + 1) % suggestions.length);
+    dispatch(nextSuggestion())
   }, [currentSuggestion, suggestions])
 
   const upKeybind = useCallback(() => {
-    //loop
-    console.log('up')
-    setCurrentSuggestion((currentSuggestion - 1 + suggestions.length) % suggestions.length);
+    dispatch(prevSuggestion())
   }, [currentSuggestion, suggestions])
-
-  const onSubmit = () => {
-    let searchTextToken: Singleton;
-    let newTokenStack = tokenStack;
-
-    if (searchText) {
-      searchTextToken = {
-        type: 'unresolved',
-        word: searchText
-      } as Singleton;
-      newTokenStack = [...tokenStack, searchTextToken];
-      setSearchText('');
-    }
-
-    if (newTokenStack.length !== 1) {
-      (window as any).toast(errorPathBeggining);
-      return;
-    }
-
-    post('/add', { expression: newTokenStack[0] })
-      .then((response) => {
-        setSearchText('');
-      })
-    
-    setTokenStack([])
-  }
-
-  const currentSuggestionToToken = (e: any) => {
-    e.preventDefault();
-
-    if (suggestions.length === 0) return;
-
-    const s = suggestions[currentSuggestion];
-    const newTokenStack = [...tokenStack, {
-      type: 'resolved',
-      word: s.word,
-      wordId: s.wordId,
-    } as Singleton];
-
-    setTokenStack(newTokenStack );
-  }
-
-  const slash = (e: any) => {
-
-  }
 
   const ref = useKeybinds({
     arrowdown: downKeybind,
     arrowup: upKeybind,
-    ctrlenter: onSubmit,
-    tab: currentSuggestionToToken,
+    ctrlenter: () => dispatch(submit()),
+    tab: (e) => (e.preventDefault(), dispatch(suggestionSelected())),
   })
+
+  const expressionTokens = !query ? null : [
+    ...toTokenComponents(query),
+    ...(explicitOperator ? [explicitOperator] : [])
+  ];
 
   return (
     <>
       <ToastRoot />
-      {tokenStack.map((t, i) =>
-        <Token key={i} unresolved={t.type === 'unresolved'} resolved={t.type === 'resolved'}>
-          {(t as any).word}
-        </Token>)
-      }
-      <form ref={r => ref.current = r} onSubmit={(e) => e.preventDefault()} >
-        <InvisibleInput type="text" placeholder="Search..."
-          onChange={(e) => {
-            setSearchText(e.target.value);
-          }}
+      {expressionTokens}
+      <form ref={r => {
+        ref.current = r
+        if (!r) return
+        r.querySelector('input')?.focus()
+      }} onSubmit={(e) => e.preventDefault()} >
+        <InvisibleInput type="text" placeholder="🔎"
+          onChange={(e) => dispatch(textInput(e.target.value))}
           value={searchText}
         />
       </form>
+      {/* JSON.stringify(tokenPath) */}
       {suggestions.map((s, i) =>
         <Suggestion current={currentSuggestion === i}>
-          {s.wordId}
-        </Suggestion>)}
+          {!(s as any).decomposition
+            ? s.wordId
+            : toParts((s as any).phrase, (s as any).decomposition, (s as any).matchIndexes)
+          }
+        </Suggestion>
+      )}
+      {quad}
+      <AutoSizer>
+        {({ height, width }: { height: number, width: number }) => 
+          <FixedSizeGrid
+            outerRef={r => setGridRef(r)}
+            columnCount={Math.floor(width / 50)}
+            rowCount={emojis.length / Math.floor(width / 50)}
+            rowHeight={50}
+            columnWidth={50}
+            height={height}
+            width={width}
+          >
+            {({ columnIndex, rowIndex, style }: any) => 
+              <Emoji {...{ style }}>{emojis[rowIndex * (Math.floor(width / 50)) + columnIndex]}</Emoji>
+            }
+          </FixedSizeGrid>
+        }
+      </AutoSizer>
+      {/* <pre>{yaml.stringify(query)}</pre> */}
     </>
   );
 }
 
-interface SuggestionDistinctProps {
-  wordResolution: WordResolution
+const Emoji = styled.span<{
+  selected?: boolean
+}>`
+  width: 50px;
+  height: 50px;
+  display: inline-grid;
+  place-items: center;
+  place-content: center;
+  transition: opacity 0.2s;
+  opacity: 0.5;
+
+  ${props => props.selected && `
+    opacity: 1;
+  `}
+
+  &:hover {
+    opacity: 1;
+  }
+
+`;
+
+const toParts = (str: string, decomposition: string[], matchIndexes: number[]) => {
+  const parts = [] as JSX.Element[];
+  let last = 0;
+  console.log(decomposition, matchIndexes, str)
+  for (let i = 0; i < matchIndexes.length; i++) {
+    const matchIndex = matchIndexes[i];
+    parts.push(<span>{str.slice(last, matchIndex)}</span>);
+    parts.push(<strong className="error">{decomposition[i]}</strong>);
+    last = matchIndex + decomposition[i].length;
+  }
+  parts.push(<span>{str.slice(last)}</span>);
+  console.log(parts)
+  return parts;
 }
-
-/* const SuggestionDistinct = ({
-  wordResolution
-}: SuggestionDistinctProps) => {
-  const r = wordResolution;
-  const { word, id } = /^(?<word>[^_]+)_(?<id>\d+)$/.exec(r.wordId)!.groups as any;
-
-  
-
-  return <Suggestion>
-    {!r.path && r.wordId}
-    {r.path && }
-  </Suggestion>
-} */
-
 
 export default App;

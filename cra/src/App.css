@@ -50,3 +50,6 @@ html, body, #root {
 .error {
   color: red;
 }
+.success {
+  color: green;
+}

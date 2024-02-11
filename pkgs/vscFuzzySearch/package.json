@@ -1,0 +1,13 @@
+{
+  "name": "@djuleayo/vscfuzzysearch",
+  "version": "0.0.4",
+  "description": "VSCode alike fuzzy search",
+  "keywords": ["fuzzy", "search", "vscode"],
+  "author": "Jovanovic Andrej",
+  "types": "vscFuzzySearch.d.ts",
+  "main": "vscFuzzySearch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC"
+}

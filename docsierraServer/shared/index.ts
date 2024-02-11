@@ -1,32 +1,35 @@
-type WordId = string;
-//type Word = string;
-
-type Token = {
+interface TokenBasis {
   type: TokenType;
 }
 
 const tokenTypes = [
-  'unresolved', 'resolved', 'path', 'labeling'
+  'urw', 'rw', '/', '.', ' ', '|'
 ] as const;
 type TokenType = typeof tokenTypes[number];
 
+export const lt = (a: TokenType, b: TokenType) => {
+  if (a === '/' && b === '.') return true;
+  if (a === '.' && b === '/') return true;
+  return tokenTypes.indexOf(a) > tokenTypes.indexOf(b);
+}
+
 //#region Word
 
-export const wordTypes = [ 'unresolved', 'resolved' ] as const;
-export const isWord = (token: Token): token is WordToken => wordTypes.includes(token.type as any);
+export const wordTypes = [ 'urw', 'rw' ] as const;
+export const isWord = (token: TokenBasis) => wordTypes.includes(token.type as any);
 
 export type WordToken =
-  | UnresolvedWord
-  | ResolvedWord
+  | URW
+  | RW
   ;
 
-export interface UnresolvedWord extends Token {
-  type: 'unresolved';
+export interface URW extends TokenBasis {
+  type: 'urw';
   word: string;
 }
 
-export interface ResolvedWord extends Token {
-  type: 'resolved';
+export interface RW extends TokenBasis {
+  type: 'rw';
   word: string;
   wordId: string;
 }
@@ -34,26 +37,38 @@ export interface ResolvedWord extends Token {
 //#endregion Word
 
 export type PathToken = {
-  type: 'path';
+  type: '/';
   children: Singleton[];
 }
 
 export type LabelingToken = {
-  type: 'labeling';
+  type: '.';
   children: Singleton[];
 }
 
-export const isSingleton = (token: Token): token is Singleton => true;
+export const isSingleton = (token: TokenBasis) => true;
 export type Singleton = 
   | WordToken
   | PathToken
   | LabelingToken
   ;
 
+export type Conjunction = {
+  type: ' ';
+  children: Singleton[];
+}
+
+export type Disjunction = {
+  type: '|';
+  children: (Singleton|Conjunction)[];
+}
+
+export type Token = URW | RW | PathToken | LabelingToken | Conjunction | Disjunction;
+
 export type LazyFetch<T> = undefined | null | T | Promise<T>;
 
 export type WordResolution = {
-  wordId: WordId;
-  path: LazyFetch<WordId[]>;
-  labels: LazyFetch<WordId[]>;
+  wordId: string;
+  path: LazyFetch<string[]>;
+  labels: LazyFetch<string[]>;
 }

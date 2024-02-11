@@ -1,6 +1,5 @@
 //define symbol to signal end of word
-const endOfWord = Symbol('endOfWord')
-type TrieState = Record<string | typeof endOfWord, any>
+type TrieState = Record<string, any>
 
 export class Trie {
   public tree = {} as TrieState
@@ -9,8 +8,8 @@ export class Trie {
     let curState = this.tree;
     str.split('').forEach((c, i) => {
       if (c in curState) curState = curState[c];
-      else curState = curState[c] = {[endOfWord]: false};
-      if (i === str.length - 1) curState[endOfWord] = true;
+      else curState = curState[c] = {endOfWord: false};
+      if (i === str.length - 1) curState.endOfWord = true;
     })
   }
 
@@ -19,7 +18,7 @@ export class Trie {
     if (!curState) return []
     const sols = [] as string[]
     const dfs = (state: TrieState, str: string) => {
-      if (state[endOfWord]) sols.push(str)
+      if (state.endOfWord) sols.push(str)
       for (const [key, value] of Object.entries(state).filter(([key]) => key.length ===1 ))
         dfs(value, str + key)
     }
@@ -39,7 +38,7 @@ export class Trie {
   remove(str: string) {
     const curState = this.state(str)
     if (!curState) return false
-    curState[endOfWord] = false
+    curState.endOfWord = false
     return true
   }
 }

@@ -35,6 +35,10 @@ const Toast = styled.div`
   padding: 1em;
   border-radius: 5px;
   margin-top: 1em;
+
+  &:hover {
+    background: #00000033;
+  }
 `
 
 const ToastManager = ({ toasts, removeToast }: {

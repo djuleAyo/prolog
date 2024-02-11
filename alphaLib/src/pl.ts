@@ -1,9 +1,20 @@
 import { cl, cw } from "../../pkgs/lang";
 import { unique } from "../../pkgs/array";
+import { exec } from "child_process";
+import { promises as fs } from "fs";
 
 export const swipl = require('swipl')
 
-const log = true
+const log = true;
+
+exec('touch dbDump');
+
+(async () => {
+  //load dbDump
+  const dbDump = (await fs.readFile('./dbDump', 'utf-8')).split('\n')
+  for (const line of dbDump)
+    if (line) swipl.call(line)
+})()
 
 export const queryVars = (query: string) => {
   return [...query.matchAll(/\b([A-Z]\w*)\b/g)].map(m => m[1])
@@ -27,6 +38,8 @@ const formatResponse = (res: any, vars: string[]) => {
 export const pl = (strings: TemplateStringsArray, ...values: any[]) => {
   const query = strings.reduce((acc, str, i) => acc + str + (values[i] || ''), '');
   log && cl(query.replace('assertz(', '+').replace(').', ''));
+  console.log(`echo "${query}" >> dbDump`)
+  query.includes('assertz') && exec(`echo "${query}" >> dbDump`)
   try {
     const res = swipl.call(query)
     const vars = queryVars(query)
@@ -41,6 +54,8 @@ export const plAll = (strings: TemplateStringsArray, ...values: any[]) => {
   const time = Date.now()
   let solutions = [] as any[]
   const q = new swipl.Query(query);
+  console.log(`echo "${query}" >> dbDump`)
+  query.includes('assertz') && exec(`echo "${query}" >> dbDump`)
   let solution = null
   while (solution = q.next()) {
     solutions.push(solution);
